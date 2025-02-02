@@ -1,10 +1,4 @@
-﻿# CasingModule.Tests.ps1
-# ================================================
-# Dot-source the module file containing your filters.
-# Adjust the path as necessary.
-. "$PSScriptRoot\CasingModule.ps1"
-
-#--------------------------------------------------------------------
+﻿#--------------------------------------------------------------------
 # Test Get-CasingStyle: verify that known inputs are detected correctly,
 # and that ambiguous strings return 'Unknown'
 #--------------------------------------------------------------------
