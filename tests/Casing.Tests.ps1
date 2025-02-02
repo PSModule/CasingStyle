@@ -114,7 +114,8 @@
             'this_is_a-CamelCaseString' |
                 Split-CasingStyle -By kebab-case |
                 Split-CasingStyle -By snake_case |
-                Should -Be @('this_is_a', 'camelcasestring')
+                Split-CasingStyle -By PascalCase |
+                Should -Be @('this', 'is', 'a', 'Camel', 'Case', 'String')
         }
 
         It "Split-CasingStyle: Splits 'this-is-a-kebab-case-string' by kebab-case" {

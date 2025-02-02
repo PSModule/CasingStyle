@@ -88,7 +88,7 @@
         'UPPER-KEBAB-CASE'
     } elseif ([regex]::Match($Text, $script:SnakeCase).Success) {
         'snake_case'
-    } elseif ([regex]::Match($Text, $script:UpperCase).Success) {
+    } elseif ([regex]::Match($Text, $script:UpperSnakeCase).Success) {
         'UPPER_SNAKE_CASE'
     } else {
         'Unknown'
