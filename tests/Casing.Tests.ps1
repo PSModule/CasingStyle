@@ -1,4 +1,4 @@
-﻿Describe 'Casing' {
+﻿Describe 'CasingStyle' {
     Context 'Function: Get-CasingStyle' {
         It "Get-CasingStyle: Detects 'testtesttest' as lowercase" {
             'testtesttest' | Get-CasingStyle | Should -Be 'lowercase'

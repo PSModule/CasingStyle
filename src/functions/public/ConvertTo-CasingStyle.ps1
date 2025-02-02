@@ -23,7 +23,7 @@
         [string] - The converted string
 
         .LINK
-        https://psmodule.io/Casing/Functions/ConvertTo-CasingStyle/
+        https://psmodule.io/CasingStyle/Functions/ConvertTo-CasingStyle/
     #>
     [OutputType([string])]
     [CmdletBinding()]

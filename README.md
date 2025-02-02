@@ -95,9 +95,9 @@ Get-Help ConvertTo-CasingStyle -Examples
 
 For further documentation, please visit the official documentation pages for each function:
 
-- [ConvertTo-CasingStyle](https://psmodule.io/Casing/Functions/ConvertTo-CasingStyle/)
-- [Get-CasingStyle](https://psmodule.io/Casing/Functions/Get-CasingStyle/)
-- [Split-CasingStyle](https://psmodule.io/Casing/Functions/Split-CasingStyle/)
+- [ConvertTo-CasingStyle](https://psmodule.io/CasingStyle/Functions/ConvertTo-CasingStyle/)
+- [Get-CasingStyle](https://psmodule.io/CasingStyle/Functions/Get-CasingStyle/)
+- [Split-CasingStyle](https://psmodule.io/CasingStyle/Functions/Split-CasingStyle/)
 
 ## Contributing
 
