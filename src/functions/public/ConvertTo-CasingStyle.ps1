@@ -1,26 +1,26 @@
 ﻿filter ConvertTo-CasingStyle {
     <#
-    .SYNOPSIS
-    Convert a string to a different casing style
+        .SYNOPSIS
+        Convert a string to a different casing style
 
-    .DESCRIPTION
-    This function converts a string to a different casing style.
+        .DESCRIPTION
+        This function converts a string to a different casing style.
 
-    .EXAMPLE
-    'thisIsCamelCase' | ConvertTo-CasingStyle -To 'snake_case'
+        .EXAMPLE
+        'thisIsCamelCase' | ConvertTo-CasingStyle -To 'snake_case'
 
-    Convert the string 'thisIsCamelCase' to 'this_is_camel_case'
+        Convert the string 'thisIsCamelCase' to 'this_is_camel_case'
 
-    .EXAMPLE
-    'thisIsCamelCase' | ConvertTo-CasingStyle -To 'UPPER_SNAKE_CASE'
+        .EXAMPLE
+        'thisIsCamelCase' | ConvertTo-CasingStyle -To 'UPPER_SNAKE_CASE'
 
-    Convert the string 'thisIsCamelCase' to 'THIS_IS_CAMEL_CASE'
+        Convert the string 'thisIsCamelCase' to 'THIS_IS_CAMEL_CASE'
 
-    .EXAMPLE
-    'thisIsCamelCase' | ConvertTo-CasingStyle -To 'kebab-case'
+        .EXAMPLE
+        'thisIsCamelCase' | ConvertTo-CasingStyle -To 'kebab-case'
 
-    .NOTES
-    General notes
+        .LINK
+        https://psmodule.io/Casing/Functions/ConvertTo-CasingStyle/
     #>
     [OutputType([string])]
     [CmdletBinding()]

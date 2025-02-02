@@ -46,25 +46,22 @@ Describe 'ConvertTo-CasingStyle Tests' {
 
     Context 'Converting from camelCase' {
         # Our sample input is in camelCase.
-        $inputText = 'thisIsCamelCase'
-        $expectedResults = @(
-            @{ Name = 'lowercase'        ; Expected = 'thisiscamelcase' }
-            @{ Name = 'UPPERCASE'        ; Expected = 'THISISCAMELCASE' }
-            @{ Name = 'Sentencecase'     ; Expected = 'Thisiscamelcase' }
-            @{ Name = 'Title Case'       ; Expected = 'This Is Camel Case' }
-            @{ Name = 'PascalCase'       ; Expected = 'ThisIsCamelCase' }
-            @{ Name = 'camelCase'        ; Expected = 'thisIsCamelCase' }
-            @{ Name = 'kebab-case'       ; Expected = 'this-is-camel-case' }
-            @{ Name = 'UPPER-KEBAB-CASE' ; Expected = 'THIS-IS-CAMEL-CASE' }
-            @{ Name = 'snake_case'       ; Expected = 'this_is_camel_case' }
-            @{ Name = 'UPPER_SNAKE_CASE' ; Expected = 'THIS_IS_CAMEL_CASE' }
+        $testCases = @(
+            @{ Name = 'lowercase'        ; Text = 'thisIsCamelCase' ; Expected = 'thisiscamelcase' }
+            @{ Name = 'UPPERCASE'        ; Text = 'thisIsCamelCase' ; Expected = 'THISISCAMELCASE' }
+            @{ Name = 'Sentencecase'     ; Text = 'thisIsCamelCase' ; Expected = 'Thisiscamelcase' }
+            @{ Name = 'Title Case'       ; Text = 'thisIsCamelCase' ; Expected = 'This Is Camel Case' }
+            @{ Name = 'PascalCase'       ; Text = 'thisIsCamelCase' ; Expected = 'ThisIsCamelCase' }
+            @{ Name = 'camelCase'        ; Text = 'thisIsCamelCase' ; Expected = 'thisIsCamelCase' }
+            @{ Name = 'kebab-case'       ; Text = 'thisIsCamelCase' ; Expected = 'this-is-camel-case' }
+            @{ Name = 'UPPER-KEBAB-CASE' ; Text = 'thisIsCamelCase' ; Expected = 'THIS-IS-CAMEL-CASE' }
+            @{ Name = 'snake_case'       ; Text = 'thisIsCamelCase' ; Expected = 'this_is_camel_case' }
+            @{ Name = 'UPPER_SNAKE_CASE' ; Text = 'thisIsCamelCase' ; Expected = 'THIS_IS_CAMEL_CASE' }
         )
 
-        foreach ($target in $expectedResults.Keys) {
-            It "converts '$inputText' to $target" {
-                $result = $inputText | ConvertTo-CasingStyle -To $target
-                $result | Should -Be $expectedResults[$target]
-            }
+        It "converts '<Text>' to '<Expected>' using '<Name>'" -ForEach $testCases {
+            $result = $Text | ConvertTo-CasingStyle -To $Name
+            $result | Should -Be $Expected
         }
     }
 

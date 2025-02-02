@@ -59,6 +59,9 @@
 
         .OUTPUTS
         [string[]] An array of strings, each representing a word in the original string.
+
+        .LINK
+        https://psmodule.io/Casing/Functions/Split-CasingStyle/
     #>
     [CmdletBinding()]
     param(
