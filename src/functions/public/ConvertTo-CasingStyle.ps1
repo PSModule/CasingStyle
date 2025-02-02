@@ -20,9 +20,7 @@
         'thisIsCamelCase' | ConvertTo-CasingStyle -To 'kebab-case'
 
         .OUTPUTS
-        [string]
-
-        The converted string.
+        [string] - The converted string
 
         .LINK
         https://psmodule.io/Casing/Functions/ConvertTo-CasingStyle/
