@@ -51,7 +51,7 @@
 
     $currentStyle = Get-CasingStyle -Text $Text
 
-    $words = Split-StringByCasingStyle -Text $Text -By $currentStyle
+    $words = Split-CasingStyle -Text $Text -By $currentStyle
 
     # Convert the words into the target style
     switch ($To) {

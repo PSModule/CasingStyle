@@ -84,7 +84,6 @@
             't_t' | Get-CasingStyle | Should -Be 'snake_case'
         }
     }
-
     Context 'Function: ConvertTo-CasingStyle' {
         It "ConvertTo-CasingStyle: Converts 'thisIsCamelCase' to 'snake_case'" {
             'thisIsCamelCase' | ConvertTo-CasingStyle -To 'snake_case' | Should -Be 'this_is_camel_case'
@@ -96,6 +95,30 @@
 
         It "ConvertTo-CasingStyle: Converts 'thisIsCamelCase' to 'this-is-camel-case'" {
             'thisIsCamelCase' | ConvertTo-CasingStyle -To 'kebab-case' | Should -Be 'this-is-camel-case'
+        }
+    }
+    Context 'Function: Split-CasingStyle' {
+        It "Split-CasingStyle: Splits 'this_is_a_kebab_case_string' by 'snake_case'" {
+            'this_is_a_kebab_case_string' | Split-CasingStyle -By 'snake_case' | Should -Be @('this', 'is', 'a', 'kebab', 'case', 'string')
+        }
+
+        It "Split-CasingStyle: Splits 'ThisIsAPascalCaseString' by 'PascalCase'" {
+            'ThisIsAPascalCaseString' | Split-CasingStyle -By 'PascalCase' | Should -Be @('This', 'Is', 'A', 'Pascal', 'Case', 'String')
+        }
+
+        It "Split-CasingStyle: Splits 'thisIsACamelCaseString' by 'camelCase'" {
+            'thisIsACamelCaseString' | Split-CasingStyle -By 'camelCase' | Should -Be @('this', 'Is', 'A', 'Camel', 'Case', 'String')
+        }
+
+        It "Split-CasingStyle: Splits 'this_is_a-CamelCaseString' by kebab-case | Split-CasingStyle -By snake_case" {
+            'this_is_a-CamelCaseString' |
+                Split-CasingStyle -By kebab-case |
+                Split-CasingStyle -By snake_case |
+                Should -Be @('this_is_a', 'camelcasestring')
+        }
+
+        It "Split-CasingStyle: Splits 'this-is-a-kebab-case-string' by kebab-case" {
+            'this-is-a-kebab-case-string' | Split-CasingStyle -By kebab-case | Should -Be @('this', 'is', 'a', 'kebab', 'case', 'string')
         }
     }
 }

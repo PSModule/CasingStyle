@@ -1,4 +1,4 @@
-﻿filter Split-StringByCasingStyle {
+﻿filter Split-CasingStyle {
     <#
         .SYNOPSIS
         Splits a kebab-case string into an array of words
@@ -7,7 +7,7 @@
         This function splits a kebab-case string into an array of words.
 
         .EXAMPLE
-        Split-StringByCasingStyle -Text 'this-is-a-kebab-case-string' -By kebab-case
+        Split-CasingStyle -Text 'this-is-a-kebab-case-string' -By kebab-case
 
         this
         is
@@ -17,7 +17,7 @@
         string
 
         .EXAMPLE
-        Split-StringByCasingStyle -Text 'this_is_a_kebab_case_string' -By 'snake_case'
+        Split-CasingStyle -Text 'this_is_a_kebab_case_string' -By 'snake_case'
 
         this
         is
@@ -27,7 +27,7 @@
         string
 
         .EXAMPLE
-        Split-StringByCasingStyle -Text 'ThisIsAPascalCaseString' -By 'PascalCase'
+        Split-CasingStyle -Text 'ThisIsAPascalCaseString' -By 'PascalCase'
 
         This
         Is
@@ -37,7 +37,7 @@
         String
 
         .EXAMPLE
-        Split-StringByCasingStyle -Text 'thisIsACamelCaseString' -By 'camelCase'
+        Split-CasingStyle -Text 'thisIsACamelCaseString' -By 'camelCase'
 
         this
         Is
@@ -47,7 +47,7 @@
         String
 
         .EXAMPLE
-        Split-StringByCasingStyle -Text 'this_is_a-CamelCaseString' -By kebab-case | Split-StringByCasingStyle -By snake_case
+        Split-CasingStyle -Text 'this_is_a-CamelCaseString' -By kebab-case | Split-CasingStyle -By snake_case
 
         this_is_a
         camelcasestring
