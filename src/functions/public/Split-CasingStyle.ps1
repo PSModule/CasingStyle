@@ -58,7 +58,9 @@
         'this_is_a-PascalString' | Split-CasingStyle -By 'snake_case','kebab-case','PascalCase'
 
         .OUTPUTS
-        [string[]] An array of strings, each representing a word in the original string.
+        [string[]]
+
+        An array of strings, each representing a word in the original string.
 
         .LINK
         https://psmodule.io/Casing/Functions/Split-CasingStyle/

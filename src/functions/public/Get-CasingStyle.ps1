@@ -56,6 +56,11 @@
 
         Unknown
 
+        .OUTPUTS
+        [string]
+
+        The detected casing style of the input string.
+
         .LINK
         https://psmodule.io/Casing/Functions/Get-CasingStyle/
     #>
