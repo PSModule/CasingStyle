@@ -60,7 +60,7 @@
         [string] - The detected casing style of the input string
 
         .LINK
-        https://psmodule.io/Casing/Functions/Get-CasingStyle/
+        https://psmodule.io/CasingStyle/Functions/Get-CasingStyle/
     #>
     [OutputType([string])]
     [CmdletBinding()]
