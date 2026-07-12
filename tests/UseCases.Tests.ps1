@@ -1,4 +1,6 @@
-﻿#--------------------------------------------------------------------
+﻿#Requires -Modules @{ ModuleName = 'Pester'; ModuleVersion = '6.0.0'; MaximumVersion = '6.*' }
+
+#--------------------------------------------------------------------
 # Test Get-CasingStyle: verify that known inputs are detected correctly,
 # and that ambiguous strings return 'Unknown'
 #--------------------------------------------------------------------
