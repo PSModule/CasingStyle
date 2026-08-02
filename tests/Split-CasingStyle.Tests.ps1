@@ -32,11 +32,13 @@ Describe 'Split-CasingStyle' {
         }
 
         It 'Splits on a tab, which Get-CasingStyle already accepts as Title Case' {
-            "Test`tTest" | Split-CasingStyle -By 'Title Case' | Should -Be @('Test', 'Test')
+            $tab = [char]9
+            "Test${tab}Test" | Split-CasingStyle -By 'Title Case' | Should -Be @('Test', 'Test')
         }
 
         It 'Splits on a newline, which Get-CasingStyle already accepts as Title Case' {
-            "Test`nTest" | Split-CasingStyle -By 'Title Case' | Should -Be @('Test', 'Test')
+            $newline = [char]10
+            "Test${newline}Test" | Split-CasingStyle -By 'Title Case' | Should -Be @('Test', 'Test')
         }
 
         It 'Ignores leading and trailing whitespace' {
