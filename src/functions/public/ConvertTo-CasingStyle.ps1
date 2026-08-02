@@ -19,8 +19,17 @@
         .EXAMPLE
         'thisIsCamelCase' | ConvertTo-CasingStyle -To 'kebab-case'
 
+        Convert the string 'thisIsCamelCase' to 'this-is-camel-case'
+
+        .INPUTS
+        System.String
+
+        The text to convert, piped in.
+
         .OUTPUTS
-        [string] - The converted string
+        System.String
+
+        The text rewritten in the requested casing style.
 
         .LINK
         https://psmodule.io/CasingStyle/Functions/ConvertTo-CasingStyle/
@@ -58,17 +67,17 @@
 
     # Convert the words into the target style
     switch ($To) {
-        'lowercase' { ($words -join '').toLower() }
-        'UPPERCASE' { ($words -join '').toUpper() }
+        'lowercase' { ($words -join '').ToLower() }
+        'UPPERCASE' { ($words -join '').ToUpper() }
         'Title Case' { ($words | ForEach-Object { $_.Substring(0, 1).ToUpper() + $_.Substring(1).ToLower() }) -join ' ' }
         'Sentencecase' { $words -join '' | ForEach-Object { $_.Substring(0, 1).ToUpper() + $_.Substring(1).ToLower() } }
         'kebab-case' { ($words -join '-').ToLower() }
         'snake_case' { ($words -join '_').ToLower() }
         'PascalCase' { ($words | ForEach-Object { $_.Substring(0, 1).ToUpper() + $_.Substring(1).ToLower() }) -join '' }
         'camelCase' {
-            $words[0].toLower() + (($words | Select-Object -Skip 1 | ForEach-Object { $_.Substring(0, 1).ToUpper() + $_.Substring(1) }) -join '')
+            $words[0].ToLower() + (($words | Select-Object -Skip 1 | ForEach-Object { $_.Substring(0, 1).ToUpper() + $_.Substring(1) }) -join '')
         }
-        'UPPER_SNAKE_CASE' { ($words -join '_').toUpper() }
-        'UPPER-KEBAB-CASE' { ($words -join '-').toUpper() }
+        'UPPER_SNAKE_CASE' { ($words -join '_').ToUpper() }
+        'UPPER-KEBAB-CASE' { ($words -join '-').ToUpper() }
     }
 }
