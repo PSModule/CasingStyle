@@ -6,10 +6,36 @@ Describe 'Split-CasingStyle' {
             @{ Text = 'this_is_a_kebab_case_string'; By = 'snake_case'; Expected = 'this', 'is', 'a', 'kebab', 'case', 'string' }
             @{ Text = 'ThisIsAPascalCaseString'; By = 'PascalCase'; Expected = 'This', 'Is', 'A', 'Pascal', 'Case', 'String' }
             @{ Text = 'thisIsACamelCaseString'; By = 'camelCase'; Expected = 'this', 'Is', 'A', 'Camel', 'Case', 'String' }
+            @{ Text = 'THIS-IS-AN-UPPER-KEBAB-STRING'; By = 'UPPER-KEBAB-CASE'; Expected = 'THIS', 'IS', 'AN', 'UPPER', 'KEBAB', 'STRING' }
+            @{ Text = 'THIS_IS_AN_UPPER_SNAKE_STRING'; By = 'UPPER_SNAKE_CASE'; Expected = 'THIS', 'IS', 'AN', 'UPPER', 'SNAKE', 'STRING' }
         )
 
         It "Splits '<Text>' by '<By>' into individual words" -ForEach $testCases {
             $Text | Split-CasingStyle -By $By | Should -Be $Expected
+        }
+    }
+
+    Context 'When the casing style has no separator of its own' {
+        $testCases = @(
+            @{ Text = 'This Is Title Case'; By = 'Title Case'; Expected = 'This', 'Is', 'Title', 'Case' }
+            @{ Text = 'Sentencecase'; By = 'Sentencecase'; Expected = , 'Sentencecase' }
+            @{ Text = 'lowercase'; By = 'lowercase'; Expected = , 'lowercase' }
+            @{ Text = 'UPPERCASE'; By = 'UPPERCASE'; Expected = , 'UPPERCASE' }
+        )
+
+        It "Falls back to whitespace when splitting '<Text>' by '<By>'" -ForEach $testCases {
+            $Text | Split-CasingStyle -By $By | Should -Be $Expected
+        }
+    }
+
+    Context 'When the text holds no word the casing style recognizes' {
+        $testCases = @(
+            @{ Text = '123'; By = 'PascalCase' }
+            @{ Text = '123'; By = 'camelCase' }
+        )
+
+        It "Returns '<Text>' unchanged when splitting by '<By>'" -ForEach $testCases {
+            $Text | Split-CasingStyle -By $By | Should -Be $Text
         }
     }
 

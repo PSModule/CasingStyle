@@ -23,6 +23,12 @@ Describe 'ConvertTo-CasingStyle' {
             @{ To = 'PascalCase'; Text = 'this-is-kebab-case'; Expected = 'ThisIsKebabCase' }
             @{ To = 'camelCase'; Text = 'this_is_snake_case'; Expected = 'thisIsSnakeCase' }
             @{ To = 'kebab-case'; Text = 'ThisIsPascalCase'; Expected = 'this-is-pascal-case' }
+            @{ To = 'snake_case'; Text = 'TEST-TEST'; Expected = 'test_test' }
+            @{ To = 'kebab-case'; Text = 'TEST_TEST'; Expected = 'test-test' }
+            @{ To = 'snake_case'; Text = 'Test Test Test'; Expected = 'test_test_test' }
+            @{ To = 'UPPERCASE'; Text = 'lowercase'; Expected = 'LOWERCASE' }
+            @{ To = 'lowercase'; Text = 'UPPERCASE'; Expected = 'uppercase' }
+            @{ To = 'PascalCase'; Text = 'Sentencecase'; Expected = 'Sentencecase' }
         )
 
         It "Converts '<Text>' to '<Expected>' using '<To>'" -ForEach $testCases {
