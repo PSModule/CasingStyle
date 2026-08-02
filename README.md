@@ -1,115 +1,59 @@
 # CasingStyle
 
-The `CasingStyle` PowerShell module provides functions for detecting, converting, and splitting different casing styles in strings. This can be
-useful for text transformations, standardizing variable names, and ensuring consistent formatting in scripts.
+`CasingStyle` is a PowerShell module that detects, converts, and splits the casing style of text. Use it to normalize variable names, translate
+identifiers between conventions, and keep generated output consistently formatted.
 
-## Prerequisites
-
-This module does not require additional dependencies, but it integrates well with the [PSModule framework](https://github.com/PSModule) for building,
-testing, and publishing PowerShell modules.
+It recognizes `lowercase`, `UPPERCASE`, `Sentencecase`, `Title Case`, `PascalCase`, `camelCase`, `kebab-case`, `UPPER-KEBAB-CASE`, `snake_case`, and
+`UPPER_SNAKE_CASE`, and needs nothing beyond PowerShell itself.
 
 ## Installation
 
-To install the module from the PowerShell Gallery, you can use the following command:
+Install the module from the PowerShell Gallery:
 
 ```powershell
 Install-PSResource -Name CasingStyle
 Import-Module -Name CasingStyle
 ```
 
-## Usage
+## Capabilities
 
-The following examples demonstrate common use cases for the module, showing how it can be applied to detect, convert, and manipulate different casing
-styles in strings.
-
-### Example 1: Convert a string to a different casing style
-
-```powershell
-'thisIsCamelCase' | ConvertTo-CasingStyle -To 'snake_case'
-# Output: this_is_camel_case
-```
-
-```powershell
-'thisIsCamelCase' | ConvertTo-CasingStyle -To 'UPPER_SNAKE_CASE'
-# Output: THIS_IS_CAMEL_CASE
-```
-
-```powershell
-'thisIsCamelCase' | ConvertTo-CasingStyle -To 'kebab-case'
-# Output: this-is-camel-case
-```
-
-### Example 2: Detect the casing style of a string
+Detect the casing style of a string:
 
 ```powershell
 'testTestTest' | Get-CasingStyle
-# Output: camelCase
+# camelCase
 ```
 
+Convert a string to another casing style, whichever style it starts in:
+
 ```powershell
-'TestTestTest' | Get-CasingStyle
-# Output: PascalCase
+'thisIsCamelCase' | ConvertTo-CasingStyle -To 'snake_case'
+# this_is_camel_case
+
+'this-is-kebab-case' | ConvertTo-CasingStyle -To 'PascalCase'
+# ThisIsKebabCase
 ```
 
-### Example 3: Split a string based on casing style
+Split a string into the words its casing encodes, chaining styles when the text mixes several:
 
 ```powershell
-Split-CasingStyle -Text 'this-is-a-kebab-case-string' -By 'kebab-case'
-# Output:
+'this_is_a-PascalString' | Split-CasingStyle -By 'snake_case', 'kebab-case', 'PascalCase'
 # this
 # is
 # a
-# kebab
-# case
-# string
-```
-
-```powershell
-Split-CasingStyle -Text 'ThisIsAPascalCaseString' -By 'PascalCase'
-# Output:
-# This
-# Is
-# A
 # Pascal
-# Case
 # String
 ```
 
-### Find more examples
-
-To find more examples of how to use the module, please refer to the [examples](examples) folder.
-
-Alternatively, you can use the following PowerShell commands:
-
-```powershell
-Get-Command -Module 'CasingStyle'
-```
-
-To find examples of each of the commands, you can use:
-
-```powershell
-Get-Help ConvertTo-CasingStyle -Examples
-```
+More end-to-end scenarios live in the [examples](examples) folder.
 
 ## Documentation
 
-For further documentation, please visit the official documentation pages for each function:
+Documentation is published at [psmodule.io/CasingStyle](https://psmodule.io/CasingStyle/).
 
-- [ConvertTo-CasingStyle](https://psmodule.io/CasingStyle/Functions/ConvertTo-CasingStyle/)
-- [Get-CasingStyle](https://psmodule.io/CasingStyle/Functions/Get-CasingStyle/)
-- [Split-CasingStyle](https://psmodule.io/CasingStyle/Functions/Split-CasingStyle/)
+Use PowerShell help and command discovery for module details:
 
-## Contributing
-
-Regardless of your experience level, your contributions are valuable! Whether you're a beginner or an expert, you can help improve this project by
-sharing feedback, reporting issues, or contributing code.
-
-### For Users
-
-If you encounter unexpected behavior, errors, or missing functionality, you can help by submitting bug reports and feature requests.
-Please see the issues tab on this project and submit a new issue that describes your experience.
-
-### For Developers
-
-If you write code, we'd love to have your contributions! Please read the [Contribution guidelines](CONTRIBUTING.md) for more information.
-You can either help by picking up an existing issue or submit a new one if you have an idea for a new feature or improvement.
+```powershell
+Get-Command -Module CasingStyle
+Get-Help -Name ConvertTo-CasingStyle -Examples
+```

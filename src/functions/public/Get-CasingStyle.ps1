@@ -56,8 +56,15 @@
 
         Unknown
 
+        .INPUTS
+        System.String
+
+        The text to inspect, piped in.
+
         .OUTPUTS
-        [string] - The detected casing style of the input string
+        System.String
+
+        The name of the detected casing style, or 'Unknown' when no style matches.
 
         .LINK
         https://psmodule.io/CasingStyle/Functions/Get-CasingStyle/

@@ -1,4 +1,4 @@
-﻿filter Split-CasingStyle {
+﻿function Split-CasingStyle {
     <#
         .SYNOPSIS
         Splits a string based on one or more casing styles.
@@ -57,12 +57,26 @@
         .EXAMPLE
         'this_is_a-PascalString' | Split-CasingStyle -By 'snake_case','kebab-case','PascalCase'
 
+        this
+        is
+        a
+        Pascal
+        String
+
+        .INPUTS
+        System.String
+
+        The text to split, piped in.
+
         .OUTPUTS
-        [string[]] - An array of strings, each representing a word in the original string
+        System.String
+
+        Each word found in the text, emitted one at a time.
 
         .LINK
         https://psmodule.io/CasingStyle/Functions/Split-CasingStyle/
     #>
+    [OutputType([string])]
     [CmdletBinding()]
     param(
         # The string to split
@@ -70,7 +84,7 @@
             Mandatory,
             ValueFromPipeline
         )]
-        [string]$Text,
+        [string] $Text,
 
         # The casing style(s) to split the string by.
         [Parameter()]
@@ -86,7 +100,7 @@
             'snake_case',
             'UPPER_SNAKE_CASE'
         )]
-        [string[]]$By
+        [string[]] $By
     )
 
     process {
@@ -97,16 +111,16 @@
         # For each casing style in the -By list, split every token accordingly.
         foreach ($style in $By) {
             Write-Verbose "Splitting by casing style: $style"
-            $newTokens = @()
+            $newTokens = [System.Collections.Generic.List[string]]::new()
             foreach ($token in $tokens) {
                 switch ($style) {
                     'PascalCase' {
                         # Use regex to match sequences like 'Pascal' and 'String' in 'PascalString'
                         $matchedTokens = [regex]::Matches($token, '([A-Z][a-z]*)')
                         if ($matchedTokens.Count -gt 0) {
-                            $newTokens += $matchedTokens | ForEach-Object { $_.Value }
+                            $newTokens.AddRange([string[]]($matchedTokens | ForEach-Object { $_.Value }))
                         } else {
-                            $newTokens += $token
+                            $newTokens.Add($token)
                         }
                         break
                     }
@@ -114,31 +128,32 @@
                         # Match leading lowercase or uppercase letter groups
                         $matchedTokens = [regex]::Matches($token, '(^[a-z]+|[A-Z][a-z]*)')
                         if ($matchedTokens.Count -gt 0) {
-                            $newTokens += $matchedTokens | ForEach-Object { $_.Value }
+                            $newTokens.AddRange([string[]]($matchedTokens | ForEach-Object { $_.Value }))
                         } else {
-                            $newTokens += $token
+                            $newTokens.Add($token)
                         }
                         break
                     }
                     'kebab-case' {
-                        $newTokens += $token -split '-'
+                        $newTokens.AddRange($token.Split('-', [StringSplitOptions]::RemoveEmptyEntries))
                         break
                     }
                     'UPPER-KEBAB-CASE' {
-                        $newTokens += $token -split '-'
+                        $newTokens.AddRange($token.Split('-', [StringSplitOptions]::RemoveEmptyEntries))
                         break
                     }
                     'snake_case' {
-                        $newTokens += $token -split '_'
+                        $newTokens.AddRange($token.Split('_', [StringSplitOptions]::RemoveEmptyEntries))
                         break
                     }
                     'UPPER_SNAKE_CASE' {
-                        $newTokens += $token -split '_'
+                        $newTokens.AddRange($token.Split('_', [StringSplitOptions]::RemoveEmptyEntries))
                         break
                     }
                     default {
-                        # For any other case styles, you might split on whitespace
-                        $newTokens += $token -split ' '
+                        # Styles that carry no separator fall back to whitespace. Get-CasingStyle
+                        # detects 'Title Case' with '\s+', so this has to match any whitespace run.
+                        $newTokens.AddRange($token.Split([char[]]$null, [StringSplitOptions]::RemoveEmptyEntries))
                         break
                     }
                 }
