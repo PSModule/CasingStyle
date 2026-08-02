@@ -26,6 +26,7 @@ Describe 'ConvertTo-CasingStyle' {
             @{ To = 'snake_case'; Text = 'TEST-TEST'; Expected = 'test_test' }
             @{ To = 'kebab-case'; Text = 'TEST_TEST'; Expected = 'test-test' }
             @{ To = 'snake_case'; Text = 'Test Test Test'; Expected = 'test_test_test' }
+            @{ To = 'snake_case'; Text = 'Test  Test'; Expected = 'test_test' }
             @{ To = 'UPPERCASE'; Text = 'lowercase'; Expected = 'LOWERCASE' }
             @{ To = 'lowercase'; Text = 'UPPERCASE'; Expected = 'uppercase' }
             @{ To = 'PascalCase'; Text = 'Sentencecase'; Expected = 'Sentencecase' }

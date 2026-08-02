@@ -135,24 +135,25 @@
                         break
                     }
                     'kebab-case' {
-                        $newTokens.AddRange([string[]]($token -split '-'))
+                        $newTokens.AddRange($token.Split('-', [StringSplitOptions]::RemoveEmptyEntries))
                         break
                     }
                     'UPPER-KEBAB-CASE' {
-                        $newTokens.AddRange([string[]]($token -split '-'))
+                        $newTokens.AddRange($token.Split('-', [StringSplitOptions]::RemoveEmptyEntries))
                         break
                     }
                     'snake_case' {
-                        $newTokens.AddRange([string[]]($token -split '_'))
+                        $newTokens.AddRange($token.Split('_', [StringSplitOptions]::RemoveEmptyEntries))
                         break
                     }
                     'UPPER_SNAKE_CASE' {
-                        $newTokens.AddRange([string[]]($token -split '_'))
+                        $newTokens.AddRange($token.Split('_', [StringSplitOptions]::RemoveEmptyEntries))
                         break
                     }
                     default {
-                        # Casing styles that carry no separator fall back to whitespace.
-                        $newTokens.AddRange([string[]]($token -split ' '))
+                        # Styles that carry no separator fall back to whitespace. Get-CasingStyle
+                        # detects 'Title Case' with '\s+', so this has to match any whitespace run.
+                        $newTokens.AddRange($token.Split([char[]]$null, [StringSplitOptions]::RemoveEmptyEntries))
                         break
                     }
                 }

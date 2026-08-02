@@ -26,6 +26,37 @@ Describe 'Split-CasingStyle' {
         It "Falls back to whitespace when splitting '<Text>' by '<By>'" -ForEach $testCases {
             $Text | Split-CasingStyle -By $By | Should -Be $Expected
         }
+
+        It 'Splits on a run of spaces without emitting an empty word' {
+            'Test  Test' | Split-CasingStyle -By 'Title Case' | Should -Be @('Test', 'Test')
+        }
+
+        It 'Splits on a tab, which Get-CasingStyle already accepts as Title Case' {
+            "Test`tTest" | Split-CasingStyle -By 'Title Case' | Should -Be @('Test', 'Test')
+        }
+
+        It 'Splits on a newline, which Get-CasingStyle already accepts as Title Case' {
+            "Test`nTest" | Split-CasingStyle -By 'Title Case' | Should -Be @('Test', 'Test')
+        }
+
+        It 'Ignores leading and trailing whitespace' {
+            '  Test Test  ' | Split-CasingStyle -By 'Title Case' | Should -Be @('Test', 'Test')
+        }
+    }
+
+    Context 'When separators repeat or sit at an edge' {
+        $testCases = @(
+            @{ Text = 'this--is'; By = 'kebab-case'; Expected = 'this', 'is' }
+            @{ Text = '-this-is-'; By = 'kebab-case'; Expected = 'this', 'is' }
+            @{ Text = 'THIS--IS'; By = 'UPPER-KEBAB-CASE'; Expected = 'THIS', 'IS' }
+            @{ Text = 'this__is'; By = 'snake_case'; Expected = 'this', 'is' }
+            @{ Text = '_this_is_'; By = 'snake_case'; Expected = 'this', 'is' }
+            @{ Text = 'THIS__IS'; By = 'UPPER_SNAKE_CASE'; Expected = 'THIS', 'IS' }
+        )
+
+        It "Splits '<Text>' by '<By>' without emitting an empty word" -ForEach $testCases {
+            $Text | Split-CasingStyle -By $By | Should -Be $Expected
+        }
     }
 
     Context 'When the text holds no word the casing style recognizes' {
